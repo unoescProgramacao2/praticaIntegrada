@@ -12,7 +12,7 @@ public class DegustusBarController {
 
     }
 
-    public ResponseEntity criarPedido(){
+    public ResponseEntity criarOrdem(){
         return ResponseEntity.ok(true);
     }
 

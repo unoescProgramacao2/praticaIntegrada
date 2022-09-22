@@ -1,11 +1,11 @@
-package edu.br.unoesc.app.dtos;
-
-import edu.br.unoesc.app.entities.Produto;
+package edu.br.unoesc.app.entities;
 
 
-public class ProdutoDTO {
+import javax.persistence.*;
 
-    private Long id;
+@Entity
+@Table(name = "Item")
+public class Item extends  EntidadeAbstrata {
 
     private String nome;
 
@@ -15,28 +15,8 @@ public class ProdutoDTO {
 
     private String categoria;
 
-    public ProdutoDTO() {
-        super();
-    }
-
-    public ProdutoDTO(Produto produto) {
-        super();
-        if (produto.getId()!=null)
-            this.id = produto.getId();
-        this.nome = produto.getNome();
-        this.descricao = produto.getDescricao();
-        this.valor = produto.getValor();
-        this.categoria = produto.getCategoria();
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @OneToMany(mappedBy = "Item", cascade = CascadeType.ALL)
+    //private List<Imagen> imagens;
 
     public String getNome() {
         return nome;
@@ -69,4 +49,12 @@ public class ProdutoDTO {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+
+    //public List<Imagen> getImagens() {
+       // return imagens;
+   // }
+
+    //public void setImagens(List<Imagen> imagens) {
+     //   this.imagens = imagens;
+    //}
 }
