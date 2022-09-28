@@ -1,11 +1,10 @@
 package edu.br.unoesc.app.entities;
 
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Item")
-public class Item extends  EntidadeAbstrata {
+public class Item extends EntidadeAbstrata {
 
     private String nome;
 
@@ -16,7 +15,7 @@ public class Item extends  EntidadeAbstrata {
     private String categoria;
 
     @OneToMany(mappedBy = "Item", cascade = CascadeType.ALL)
-    //private List<Imagen> imagens;
+    // private List<Imagen> imagens;
 
     public String getNome() {
         return nome;
@@ -50,11 +49,11 @@ public class Item extends  EntidadeAbstrata {
         this.categoria = categoria;
     }
 
-    //public List<Imagen> getImagens() {
-       // return imagens;
-   // }
+    // public List<Imagen> getImagens() {
+    // return imagens;
+    // }
 
-    //public void setImagens(List<Imagen> imagens) {
-     //   this.imagens = imagens;
-    //}
+    // public void setImagens(List<Imagen> imagens) {
+    // this.imagens = imagens;
+    // }
 }

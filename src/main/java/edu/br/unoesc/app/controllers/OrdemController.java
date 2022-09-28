@@ -4,17 +4,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/bar")
-public class DegustusBarController {
+@RequestMapping("/api/ordem")
+public class OrdemController {
 
-    public ResponseEntity abrirComanda(){
-        return ResponseEntity.ok(true);
-
-    }
-
-    public ResponseEntity criarOrdem(){
+    @PostMapping("/")
+    public ResponseEntity criarOrdem() {
         return ResponseEntity.ok(true);
     }
-
 
 }
