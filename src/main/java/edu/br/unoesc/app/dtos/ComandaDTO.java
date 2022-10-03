@@ -1,6 +1,12 @@
 package edu.br.unoesc.app.dtos;
 
+import java.time.LocalDateTime;
+import java.util.*;
+
+import javax.persistence.*;
+
 import edu.br.unoesc.app.entities.Comanda;
+import edu.br.unoesc.app.entities.Item;
 
 public class ComandaDTO {
 
@@ -8,9 +14,9 @@ public class ComandaDTO {
 
     private Double valor;
 
-    private String dataAbertura;
+    private LocalDateTime dataAbertura;
 
-    private String dataFechamento;
+    private LocalDateTime dataFechamento;
 
     private long funcionarioId;
 
@@ -51,19 +57,19 @@ public class ComandaDTO {
         this.valor = valor;
     }
 
-    public String getDataAbertura() {
+    public LocalDateTime getDataAbertura() {
         return dataAbertura;
     }
 
-    public void setDataAbertura(String dataAbertura) {
+    public void setDataAbertura(LocalDateTime dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
 
-    public String getDataFechamento() {
+    public LocalDateTime getDataFechamento() {
         return dataFechamento;
     }
 
-    public void setDataFechamento(String dataFechamento) {
+    public void setDataFechamento(LocalDateTime dataFechamento) {
         this.dataFechamento = dataFechamento;
     }
 

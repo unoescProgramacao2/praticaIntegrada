@@ -1,5 +1,8 @@
 package edu.br.unoesc.app.entities;
 
+import java.time.LocalDateTime;
+import java.util.*;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,15 +11,23 @@ public class Comanda extends EntidadeAbstrata {
 
     private Double valor;
 
-    private String dataAbertura;
+    private LocalDateTime dataAbertura = LocalDateTime.now();
 
-    private String dataFechamento;
+    private LocalDateTime dataFechamento = null;
 
     private long funcionarioId;
 
     private long mesaId;
 
     private long empresaId;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "ItensComanda", joinColumns = { @JoinColumn(name = "id") }, inverseJoinColumns = {
+            @JoinColumn(name = "id") })
+    private Set<Item> itens = new HashSet<>();
 
     public Double getValor() {
         return valor;
@@ -26,19 +37,19 @@ public class Comanda extends EntidadeAbstrata {
         this.valor = valor;
     }
 
-    public String getDataAbertura() {
+    public LocalDateTime getDataAbertura() {
         return dataAbertura;
     }
 
-    public void setDataAbertura(String dataAbertura) {
+    public void setDataAbertura(LocalDateTime dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
 
-    public String getDataFechamento() {
+    public LocalDateTime getDataFechamento() {
         return dataFechamento;
     }
 
-    public void setDataFechamento(String dataFechamento) {
+    public void setDataFechamento(LocalDateTime dataFechamento) {
         this.dataFechamento = dataFechamento;
     }
 
@@ -64,6 +75,11 @@ public class Comanda extends EntidadeAbstrata {
 
     public void setEmpresaId(long empresaId) {
         this.empresaId = empresaId;
+    }
+
+    public void addItem(Item item) {
+        this.itens.add(item);
+        item.getComandas().add(this);
     }
 
 }
