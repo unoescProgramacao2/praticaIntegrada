@@ -21,14 +21,6 @@ public class Comanda extends EntidadeAbstrata {
 
     private long empresaId;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(name = "ItensComanda", joinColumns = { @JoinColumn(name = "id") }, inverseJoinColumns = {
-            @JoinColumn(name = "id") })
-    private Set<Item> itens = new HashSet<>();
-
     public Double getValor() {
         return valor;
     }
@@ -78,8 +70,7 @@ public class Comanda extends EntidadeAbstrata {
     }
 
     public void addItem(Item item) {
-        this.itens.add(item);
-        item.getComandas().add(this);
+
     }
 
 }

@@ -1,20 +1,13 @@
 package edu.br.unoesc.app.dtos;
 
 import java.time.LocalDateTime;
-import java.util.*;
-
-import javax.persistence.*;
-
 import edu.br.unoesc.app.entities.Comanda;
-import edu.br.unoesc.app.entities.Item;
 
 public class ComandaDTO {
 
     private Long id;
 
     private Double valor;
-
-    private LocalDateTime dataAbertura;
 
     private LocalDateTime dataFechamento;
 
@@ -33,7 +26,6 @@ public class ComandaDTO {
         if (comanda.getId() != null)
             this.id = comanda.getId();
         this.valor = comanda.getValor();
-        this.dataAbertura = comanda.getDataAbertura();
         this.dataFechamento = comanda.getDataFechamento();
         this.funcionarioId = comanda.getFuncionarioId();
         this.mesaId = comanda.getMesaId();
@@ -55,14 +47,6 @@ public class ComandaDTO {
 
     public void setValor(Double valor) {
         this.valor = valor;
-    }
-
-    public LocalDateTime getDataAbertura() {
-        return dataAbertura;
-    }
-
-    public void setDataAbertura(LocalDateTime dataAbertura) {
-        this.dataAbertura = dataAbertura;
     }
 
     public LocalDateTime getDataFechamento() {

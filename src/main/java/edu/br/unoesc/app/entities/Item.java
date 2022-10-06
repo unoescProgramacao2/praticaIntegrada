@@ -16,13 +16,6 @@ public class Item extends EntidadeAbstrata {
 
     private String categoria;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    }, mappedBy = "itens")
-    private Set<Comanda> comandas = new HashSet<>();
-
-    @OneToMany(mappedBy = "Item", cascade = CascadeType.ALL)
     // private List<Imagen> imagens;
 
     public String getNome() {
@@ -55,14 +48,6 @@ public class Item extends EntidadeAbstrata {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
-    }
-
-    public Set<Comanda> getComandas() {
-        return comandas;
-    }
-
-    public void setTutorials(Set<Comanda> comandas) {
-        this.comandas = comandas;
     }
 
     // public List<Imagen> getImagens() {

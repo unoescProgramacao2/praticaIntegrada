@@ -54,7 +54,6 @@ public class ComandaService {
     public ComandaDTO registrarComanda(Comanda comandaParaAbrir, ComandaDTO comandaDTO) {
 
         comandaParaAbrir.setValor(comandaDTO.getValor());
-        comandaParaAbrir.setDataAbertura(comandaDTO.getDataAbertura());
         comandaParaAbrir.setDataFechamento(comandaDTO.getDataFechamento());
         comandaParaAbrir.setFuncionarioId(comandaDTO.getFuncionarioId());
         comandaParaAbrir.setMesaId(comandaDTO.getMesaId());
