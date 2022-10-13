@@ -1,8 +1,12 @@
 package edu.br.unoesc.app.services;
 
 import edu.br.unoesc.app.dtos.ComandaDTO;
+import edu.br.unoesc.app.dtos.FuncionarioDTO;
 import edu.br.unoesc.app.entities.Comanda;
+import edu.br.unoesc.app.entities.Funcionario;
 import edu.br.unoesc.app.repositories.ComandaRepository;
+import edu.br.unoesc.app.repositories.FuncionarioRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +23,9 @@ public class ComandaService {
 
     @Autowired
     ComandaRepository comandaRepository;
+
+    @Autowired
+    FuncionarioRepository funcionarioRepository;
 
     public List<ComandaDTO> buscarTodasComandas() {
         List<ComandaDTO> ComandasDTO = new ArrayList<ComandaDTO>();
@@ -53,9 +60,20 @@ public class ComandaService {
 
     public ComandaDTO registrarComanda(Comanda comandaParaAbrir, ComandaDTO comandaDTO) {
 
+        try {
+            Funcionario funcionario = funcionarioRepository.findById(comandaDTO.getFuncionarioId());
+
+            if (funcionario == null)
+                throw new RuntimeException("Funcionario não existe na base de dados");
+
+            comandaParaAbrir.setFuncionario(funcionario);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Funcionario não existe na base de dados");
+        }
+
         comandaParaAbrir.setValor(comandaDTO.getValor());
         comandaParaAbrir.setDataFechamento(comandaDTO.getDataFechamento());
-        comandaParaAbrir.setFuncionarioId(comandaDTO.getFuncionarioId());
         comandaParaAbrir.setMesaId(comandaDTO.getMesaId());
         comandaParaAbrir.setEmpresaId(comandaDTO.getEmpresaId());
 

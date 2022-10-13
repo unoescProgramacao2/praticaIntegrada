@@ -15,7 +15,9 @@ public class Comanda extends EntidadeAbstrata {
 
     private LocalDateTime dataFechamento = null;
 
-    private long funcionarioId;
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "funcionario_id")
+    private Funcionario funcionario;
 
     private long mesaId;
 
@@ -45,12 +47,12 @@ public class Comanda extends EntidadeAbstrata {
         this.dataFechamento = dataFechamento;
     }
 
-    public long getFuncionarioId() {
-        return funcionarioId;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public void setFuncionarioId(long funcionarioId) {
-        this.funcionarioId = funcionarioId;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
     public long getMesaId() {

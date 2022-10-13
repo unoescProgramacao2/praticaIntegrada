@@ -27,7 +27,7 @@ public class ComandaDTO {
             this.id = comanda.getId();
         this.valor = comanda.getValor();
         this.dataFechamento = comanda.getDataFechamento();
-        this.funcionarioId = comanda.getFuncionarioId();
+        this.funcionarioId = comanda.getFuncionario().getId();
         this.mesaId = comanda.getMesaId();
         this.empresaId = comanda.getEmpresaId();
 
