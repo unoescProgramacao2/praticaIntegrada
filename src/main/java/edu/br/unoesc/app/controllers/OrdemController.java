@@ -9,17 +9,17 @@ import edu.br.unoesc.app.dtos.OrdemDTO;
 import edu.br.unoesc.app.services.OrdemService;
 
 @RestController
-@RequestMapping("/api/ordem")
+@RequestMapping("/api")
 public class OrdemController {
 
     @Autowired
     OrdemService ordemService;
 
-    @PostMapping("/")
+    @PostMapping("/ordem")
     public ResponseEntity criarOrdem(@RequestBody OrdemDTO novaOrdemDTO) {
         try {
             novaOrdemDTO = this.ordemService.criarOrdem(novaOrdemDTO);
-            return ResponseEntity.ok(true);
+            return ResponseEntity.ok(novaOrdemDTO);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

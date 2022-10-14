@@ -27,16 +27,6 @@ public class OrdemService {
 
         Ordem ordemParaCriar;
 
-        /*
-         * if (itensComandaDTO.getId() != null) {
-         * ItensComanda itensComandaExistente =
-         * ordemRepository.findById(itensComandaDTO.getId());
-         * if (itensComandaExistente != null) {
-         * throw new RuntimeException("Ordem já existe");
-         * }
-         * }
-         */
-
         ordemParaCriar = new Ordem();
 
         return this.registrarOrdem(ordemParaCriar, ordemDTO);
@@ -45,13 +35,24 @@ public class OrdemService {
     public OrdemDTO registrarOrdem(Ordem ordemParaCriar, OrdemDTO ordemDTO) {
 
         Item item = itemRepository.findById(ordemDTO.getItemId());
+        if (item == null)
+            throw new RuntimeException("Item não existe");
+
         Comanda comanda = comandaRepository.findById(ordemDTO.getComandaId());
+        if (comanda == null)
+            throw new RuntimeException("Comanda não existe");
 
         ordemParaCriar.setComanda(comanda);
         ordemParaCriar.setItem(item);
 
         ordemParaCriar.setQuantidade(ordemDTO.getQuantidade());
         ordemParaCriar.setId(ordemDTO.getId());
+
+        Double valorOrdem = ordemDTO.getQuantidade() * item.getValor();
+        ordemParaCriar.setValor(valorOrdem);
+
+        Double valorComanda = comanda.getValor() + valorOrdem;
+        comanda.setValor(valorComanda);
 
         ordemRepository.save(ordemParaCriar);
 

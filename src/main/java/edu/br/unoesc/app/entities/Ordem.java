@@ -16,6 +16,8 @@ public class Ordem extends EntidadeAbstrata {
 
     private int quantidade;
 
+    private Double valor;
+
     public Comanda getComanda() {
         return comanda;
     }
@@ -38,6 +40,14 @@ public class Ordem extends EntidadeAbstrata {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
     }
 
 }
