@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/comanda")
+@RequestMapping("/api")
 public class ComandaController {
 
     @Autowired
@@ -24,18 +24,18 @@ public class ComandaController {
     @Autowired
     ItemRepository itemRepository;
 
-    @GetMapping("/")
+    @GetMapping("/comanda")
     public ResponseEntity buscarTodasComandas() {
         return ResponseEntity.ok(comandaService.buscarTodasComandas());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/comanda/{id}")
     public ResponseEntity<ComandaDTO> getComandaPorId(@PathVariable Long id) {
         ComandaDTO comandaDTO = comandaService.getComandaPorId(id);
         return new ResponseEntity<>(comandaDTO, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/comanda")
     public ResponseEntity abrirComanda(@RequestBody ComandaDTO novaComandaDTO) {
         try {
             novaComandaDTO = comandaService.abrirComanda(novaComandaDTO);
@@ -45,7 +45,7 @@ public class ComandaController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/comanda/{id}")
     public ResponseEntity fecharComanda(@RequestBody ComandaDTO comandaDTO) {
         try {
             comandaDTO = comandaService.fecharComanda(comandaDTO);
@@ -53,16 +53,6 @@ public class ComandaController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
-    }
-
-    @PostMapping("/{comandaId}/Item")
-    public ResponseEntity addItem(@PathVariable(value = "comandaId") Long comandaId, @RequestBody Item itemRequest) {
-        Comanda comanda = comandaRepository.findById(comandaId);
-
-        comanda.addItem(itemRequest);
-        itemRepository.save(itemRequest);
-
-        return ResponseEntity.ok(comanda);
     }
 
 }
