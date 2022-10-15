@@ -11,11 +11,11 @@ public class ComandaDTO {
 
     private LocalDateTime dataFechamento;
 
-    private long funcionarioId;
+    private Long funcionarioId;
 
-    private long mesaId;
+    private Long mesaId;
 
-    private long empresaId;
+    private Long empresaId;
 
     public ComandaDTO() {
         super();
@@ -29,7 +29,7 @@ public class ComandaDTO {
         this.dataFechamento = comanda.getDataFechamento();
         this.funcionarioId = comanda.getFuncionario().getId();
         this.mesaId = comanda.getMesaId();
-        this.empresaId = comanda.getEmpresaId();
+        this.empresaId = comanda.getEmpresa().getId();
 
     }
 
@@ -57,27 +57,27 @@ public class ComandaDTO {
         this.dataFechamento = dataFechamento;
     }
 
-    public long getFuncionarioId() {
+    public Long getFuncionarioId() {
         return funcionarioId;
     }
 
-    public void setFuncionarioId(long funcionarioId) {
+    public void setFuncionarioId(Long funcionarioId) {
         this.funcionarioId = funcionarioId;
     }
 
-    public long getMesaId() {
+    public Long getMesaId() {
         return mesaId;
     }
 
-    public void setMesaId(long mesaId) {
+    public void setMesaId(Long mesaId) {
         this.mesaId = mesaId;
     }
 
-    public long getEmpresaId() {
+    public Long getEmpresaId() {
         return empresaId;
     }
 
-    public void setEmpresaId(long empresaId) {
+    public void setEmpresaId(Long empresaId) {
         this.empresaId = empresaId;
     }
 

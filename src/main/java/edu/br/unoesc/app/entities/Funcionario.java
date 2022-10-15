@@ -1,7 +1,6 @@
 package edu.br.unoesc.app.entities;
 
 import javax.persistence.*;
-import java.util.*;
 
 @Entity
 @Table(name = "funcionarios")

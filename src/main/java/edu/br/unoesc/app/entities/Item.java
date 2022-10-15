@@ -1,11 +1,9 @@
 package edu.br.unoesc.app.entities;
 
-import java.util.*;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Item")
+@Table(name = "Itens")
 public class Item extends EntidadeAbstrata {
 
     private String nome;

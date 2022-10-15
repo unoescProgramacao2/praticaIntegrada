@@ -1,12 +1,10 @@
 package edu.br.unoesc.app.entities;
 
 import java.time.LocalDateTime;
-import java.util.*;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Comanda")
+@Table(name = "Comandas")
 public class Comanda extends EntidadeAbstrata {
 
     private Double valor;
@@ -19,9 +17,11 @@ public class Comanda extends EntidadeAbstrata {
     @JoinColumn(nullable = false, name = "funcionario_id")
     private Funcionario funcionario;
 
-    private long mesaId;
+    private Long mesaId;
 
-    private long empresaId;
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "empresa_id")
+    private Empresa empresa;
 
     public Double getValor() {
         return valor;
@@ -55,24 +55,20 @@ public class Comanda extends EntidadeAbstrata {
         this.funcionario = funcionario;
     }
 
-    public long getMesaId() {
+    public Long getMesaId() {
         return mesaId;
     }
 
-    public void setMesaId(long mesaId) {
+    public void setMesaId(Long mesaId) {
         this.mesaId = mesaId;
     }
 
-    public long getEmpresaId() {
-        return empresaId;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setEmpresaId(long empresaId) {
-        this.empresaId = empresaId;
-    }
-
-    public void addItem(Item item) {
-
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
 }

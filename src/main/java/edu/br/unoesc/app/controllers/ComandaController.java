@@ -45,7 +45,7 @@ public class ComandaController {
         }
     }
 
-    @PutMapping("/comanda/{id}")
+    @PatchMapping("/comanda")
     public ResponseEntity fecharComanda(@RequestBody ComandaDTO comandaDTO) {
         try {
             comandaDTO = comandaService.fecharComanda(comandaDTO);
