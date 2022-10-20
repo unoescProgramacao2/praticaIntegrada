@@ -11,9 +11,13 @@ import edu.br.unoesc.app.repositories.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.time.Period.*;
 
 @Service
 public class ComandaService {
@@ -109,4 +113,33 @@ public class ComandaService {
 
         return comandaDTO;
     }
+
+    public void deletarComanda(Long comandaId) {
+
+        Comanda comandaParaDeletar = comandaRepository.findById(comandaId);
+
+        if (comandaParaDeletar == null) {
+            throw new RuntimeException("Comanda não encontrada na base de dados");
+        }
+
+        boolean podeAlterar = this.validarAlteracaoComanda(comandaParaDeletar, 2);
+
+        if (podeAlterar) {
+
+            comandaParaDeletar.setDataAtualizacao(LocalDateTime.now());
+
+            this.comandaRepository.delete(comandaParaDeletar);
+        } else
+            throw new RuntimeException("Comanda não pode ser deletada");
+
+    }
+
+    private boolean validarAlteracaoComanda(Comanda comanda, int prazoEmDiasParaAlteracao) {
+
+        Period diff = between(comanda.getDataCriacao().toLocalDate(),
+                LocalDate.now());
+        return (diff.getDays() <= prazoEmDiasParaAlteracao) ? true : false;
+
+    }
+
 }
