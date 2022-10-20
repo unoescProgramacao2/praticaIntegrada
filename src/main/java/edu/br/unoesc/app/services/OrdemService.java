@@ -1,5 +1,12 @@
 package edu.br.unoesc.app.services;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
+import static java.time.Period.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,5 +64,51 @@ public class OrdemService {
         ordemRepository.save(ordemParaCriar);
 
         return new OrdemDTO(ordemParaCriar);
+    }
+
+    public List<OrdemDTO> listarTodas() {
+        List<OrdemDTO> OrdensDTO = new ArrayList<OrdemDTO>();
+        List<Ordem> ordens = ordemRepository.findAll();
+        ordens.forEach(ordem -> {
+            OrdemDTO ordemDTO = new OrdemDTO(ordem);
+            OrdensDTO.add(ordemDTO);
+        });
+        return OrdensDTO;
+    }
+
+    public OrdemDTO buscaOrdemPorId(Long OrdemId) {
+        Ordem ordem = ordemRepository.findById(OrdemId);
+        if (ordem == null)
+            throw new RuntimeException("Ordem não encontrada na base de dados");
+        OrdemDTO ordemDTO = new OrdemDTO(ordem);
+        return ordemDTO;
+    }
+
+    public void deletarOrdem(Long OrdemId) {
+
+        Ordem ordemParaDeletar = ordemRepository.findById(OrdemId);
+
+        if (ordemParaDeletar == null) {
+            throw new RuntimeException("Ordem não encontrada na base de dados");
+        }
+
+        boolean podeAlterar = this.validarAlteracaoOrdem(ordemParaDeletar, 2);
+
+        if (podeAlterar) {
+
+            ordemParaDeletar.setDataAtualizacao(LocalDateTime.now());
+
+            this.ordemRepository.delete(ordemParaDeletar);
+        } else
+            throw new RuntimeException("Ordem não pode ser deletada");
+
+    }
+
+    private boolean validarAlteracaoOrdem(Ordem ordem, int prazoEmDiasParaAlteracao) {
+
+        Period diff = between(ordem.getDataCriacao().toLocalDate(),
+                LocalDate.now());
+        return (diff.getDays() <= prazoEmDiasParaAlteracao) ? true : false;
+
     }
 }
