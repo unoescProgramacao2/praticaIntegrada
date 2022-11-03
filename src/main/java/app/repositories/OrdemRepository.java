@@ -12,4 +12,6 @@ public interface OrdemRepository extends CrudRepository<Ordem, String> {
     public Ordem findById(Long id);
 
     public List<Ordem> findAll();
+
+    public List<Ordem> findByComandaId(Long comandaId);
 }

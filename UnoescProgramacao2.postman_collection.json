@@ -39,6 +39,39 @@
 					"response": []
 				},
 				{
+					"name": "GET - Lista Todos produtos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/item",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "PATCH - Atualizar produto",
 					"request": {
 						"method": "PATCH",
@@ -69,6 +102,19 @@
 				},
 				{
 					"name": "GET - Busca produto por id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -83,26 +129,6 @@
 								"api",
 								"item",
 								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET - Lista Todos produtos",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/item",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"item"
 							]
 						}
 					},
@@ -132,96 +158,22 @@
 			]
 		},
 		{
-			"name": "Comanda",
+			"name": "Funcionario",
 			"item": [
 				{
-					"name": "get comanda",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/comanda",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"comanda"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "post comanda",
+					"name": "post funcionarios",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"valor\":0,\r\n    \"funcionarioId\":1\r\n\r\n}",
+							"raw": "{\r\n    \"nome\":\"cleber\",\r\n    \"sobrenome\":\"alberto\",\r\n    \"usuario\":\"cleb\",\r\n    \"senha\":\"cleb123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/api/comanda",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"comanda"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "patch fechar comanda",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\":2,\r\n    \"valor\":4\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/comanda",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"comanda"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Funcionario",
-			"item": [
-				{
-					"name": "get funcionario",
-					"request": {
-						"method": "GET",
-						"header": [],
 						"url": {
 							"raw": "http://localhost:8080/api/funcionario",
 							"protocol": "http",
@@ -238,40 +190,10 @@
 					"response": []
 				},
 				{
-					"name": "get funcionario id",
+					"name": "get funcionario",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/funcionario/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"funcionario",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "post funcionarios",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nome\":\"cleber\",\r\n    \"sobrenome\":\"alberto\",\r\n    \"usuario\":\"cleb\",\r\n    \"senha\":\"cleb123\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "http://localhost:8080/api/funcionario",
 							"protocol": "http",
@@ -318,6 +240,27 @@
 					"response": []
 				},
 				{
+					"name": "get funcionario id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/funcionario/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"funcionario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "delete funcionario",
 					"request": {
 						"method": "DELETE",
@@ -344,10 +287,19 @@
 			"name": "Empresa",
 			"item": [
 				{
-					"name": "get empresa",
+					"name": "post empresa",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nomeFantasia\":\"empresa\",\r\n    \"razaoSocial\":\"empresa MEI\",\r\n    \"cnpj\":123123\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8080/api/empresa",
 							"protocol": "http",
@@ -364,40 +316,10 @@
 					"response": []
 				},
 				{
-					"name": "get empresa id",
+					"name": "get empresa",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/empresa/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"empresa",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "post empresa",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nomeFantasia\":\"empresa\",\r\n    \"razaoSocial\":\"empresa MEI\",\r\n    \"cnpj\":123123\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "http://localhost:8080/api/empresa",
 							"protocol": "http",
@@ -443,12 +365,12 @@
 					"response": []
 				},
 				{
-					"name": "delete empresa",
+					"name": "get empresa id",
 					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/empresa/2",
+							"raw": "http://localhost:8080/api/empresa/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -457,7 +379,153 @@
 							"path": [
 								"api",
 								"empresa",
-								"2"
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete empresa",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/empresa/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"empresa",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comanda",
+			"item": [
+				{
+					"name": "post comanda",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"valor\":0,\r\n    \"funcionarioId\":1,\r\n    \"empresaId\":1\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/comanda",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comanda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get comanda",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/comanda",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comanda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch fechar comanda",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/comanda",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comanda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get comanda id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/comanda/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comanda",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete comanda",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/comanda/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comanda",
+								"1"
 							]
 						}
 					},
@@ -492,6 +560,90 @@
 							"path": [
 								"api",
 								"ordem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get ordem",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/ordem",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"ordem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get ordem id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/ordem/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"ordem",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get ordem por comanda",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/comanda/1/ordem",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comanda",
+								"1",
+								"ordem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete ordem",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/ordem/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"ordem",
+								"1"
 							]
 						}
 					},
@@ -532,6 +684,28 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});"
+				]
+			}
 		}
 	]
 }
