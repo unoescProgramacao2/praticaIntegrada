@@ -28,8 +28,12 @@ public class OrdemController {
 
     @GetMapping("/ordem")
     public ResponseEntity buscarTodasOrdens() {
-        List<OrdemDTO> listaDeOrdens = ordemService.listarTodas();
-        return ResponseEntity.ok(listaDeOrdens);
+        try {
+            List<OrdemDTO> listaDeOrdens = ordemService.listarTodas();
+            return ResponseEntity.ok(listaDeOrdens);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @GetMapping("/ordem/{ordemId}")
@@ -47,6 +51,16 @@ public class OrdemController {
         try {
             ordemService.deletarOrdem(ordemId);
             return ResponseEntity.ok("Deletado com sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/comanda/{comandaId}/ordem")
+    public ResponseEntity buscarOrdensPorComanda(@PathVariable Long comandaId) {
+        try {
+            List<OrdemDTO> listaDeOrdens = ordemService.buscarOrdensPorComanda(comandaId);
+            return ResponseEntity.ok(listaDeOrdens);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

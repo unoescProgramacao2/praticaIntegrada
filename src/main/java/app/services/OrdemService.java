@@ -111,4 +111,16 @@ public class OrdemService {
         return (diff.getDays() <= prazoEmDiasParaAlteracao) ? true : false;
 
     }
+
+    public List<OrdemDTO> buscarOrdensPorComanda(Long comandaId) {
+        List<OrdemDTO> OrdensDTO = new ArrayList<OrdemDTO>();
+        List<Ordem> ordens = ordemRepository.findByComandaId(comandaId);
+
+        ordens.forEach(ordem -> {
+            OrdemDTO ordemDTO = new OrdemDTO(ordem);
+            OrdensDTO.add(ordemDTO);
+        });
+        return OrdensDTO;
+
+    }
 }

@@ -1,6 +1,6 @@
 package app.config;
 
-//import app.services.UserDetailsServiceImpl;
+import app.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +15,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    // @Autowired
-    // UserDetailsServiceImpl userDetailsService;
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -25,24 +25,22 @@ public class WebSecurityConfig {
                 .antMatchers("/h2/**").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/css/**").permitAll()
-                .antMatchers("/assets/**").permitAll();
-        // .anyRequest().authenticated()
-        // .and()
-        // .formLogin()
-        // .loginPage("/login")
-        // .permitAll()
-        // .and()
-        // .logout()
-        // .permitAll();
+                .antMatchers("/assets/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
         http.csrf().disable();
         http.headers().frameOptions().disable();
         return http.build();
     }
 
-    // @Autowired
-    // public void configureGlobal(AuthenticationManagerBuilder auth) throws
-    // Exception {
-    // auth.userDetailsService(userDetailsService).passwordEncoder(new
-    // CustomPasswordEncoder());
-    // }
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(new CustomPasswordEncoder());
+    }
 }
