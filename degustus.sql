@@ -45,6 +45,7 @@ create table if not exists produto (
     nome varchar(50) not null,
     unidadeMedida decimal(10,2) not null,
     idCategoria integer not null,
+    urlImage varchar(100),
     constraint pk_produto primary key (id),
     constraint fk_produto_categoria foreign key (idCategoria) references categoria (id)
 );
