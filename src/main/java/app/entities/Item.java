@@ -48,6 +48,18 @@ public class Item extends EntidadeAbstrata {
         this.categoria = categoria;
     }
 
+    @ManyToOne
+    @JoinColumn(nullable = true, name = "empresa_id")
+    private Empresa empresa;
+
+    public Empresa getEmpresa() {
+
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
     // public List<Imagen> getImagens() {
     // return imagens;
     // }

@@ -2,7 +2,9 @@ package app.services;
 
 import app.dtos.ItemDTO;
 import app.entities.Item;
+import app.entities.Empresa;
 import app.repositories.ItemRepository;
+import app.repositories.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,10 @@ public class ItemService {
 
     @Autowired
     ItemRepository itemRepository;
+
+    @Autowired
+    EmpresaRepository empresaRepository;
+
 
     public List<ItemDTO> listarTodos() {
         List<ItemDTO> ItemsDTO = new ArrayList<ItemDTO>();
@@ -109,12 +115,17 @@ public class ItemService {
     }
 
     private ItemDTO registrarItem(Item itemQueVaiSerGravado, ItemDTO itemDTO) {
+        Empresa empresa = empresaRepository.findById(itemDTO.getEmpresaId());
+        
+        if (empresa == null)
+            throw new RuntimeException("Empresa não existe na base de dados");
+
+        itemQueVaiSerGravado.setEmpresa(empresa);
 
         itemQueVaiSerGravado.setNome(itemDTO.getNome());
         itemQueVaiSerGravado.setDescricao(itemDTO.getDescricao());
         itemQueVaiSerGravado.setValor(itemDTO.getValor());
         itemQueVaiSerGravado.setCategoria(itemDTO.getCategoria());
-
         itemRepository.save(itemQueVaiSerGravado);
         itemDTO.setId(itemQueVaiSerGravado.getId());
 
