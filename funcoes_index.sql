@@ -27,13 +27,13 @@ $$ LANGUAGE plpgsql;
 select valorComandasAbertoEmpresa(1);
 
 CREATE OR REPLACE FUNCTION produtosMaisVendidos()
-RETURNS TABLE (quantidade BIGINT, nome VARCHAR ) AS $$
+RETURNS TABLE (quantidadeTotal BIGINT, nome VARCHAR, preco FLOAT, valorTotal DOUBLE PRECISION) AS $$
 BEGIN
     RETURN QUERY
-      select sum(o.quantidade) as quantidade, i.nome 
+      select sum(o.quantidade) as quantidade, i.nome, i.valor, sum(o.quantidade) * i.valor as valorTotal
         from ordens o join itens i on o.item_id = i.id
         join comandas c on o.comanda_id = c.id 
-        group by i.nome
+        group by i.nome, i.valor
         order by sum(o.quantidade) desc;  
     RETURN;
 END;
