@@ -35,7 +35,6 @@ public class ItemService {
     @Autowired
     EmpresaRepository empresaRepository;
 
-
     public List<ItemDTO> listarTodos() {
         List<ItemDTO> ItemsDTO = new ArrayList<ItemDTO>();
         List<Item> items = itemRepository.findAll();
@@ -116,7 +115,7 @@ public class ItemService {
 
     private ItemDTO registrarItem(Item itemQueVaiSerGravado, ItemDTO itemDTO) {
         Empresa empresa = empresaRepository.findById(itemDTO.getEmpresaId());
-        
+
         if (empresa == null)
             throw new RuntimeException("Empresa não existe na base de dados");
 
@@ -125,6 +124,7 @@ public class ItemService {
         itemQueVaiSerGravado.setNome(itemDTO.getNome());
         itemQueVaiSerGravado.setDescricao(itemDTO.getDescricao());
         itemQueVaiSerGravado.setValor(itemDTO.getValor());
+        itemQueVaiSerGravado.setUrl(itemDTO.getUrl());
         itemQueVaiSerGravado.setCategoria(itemDTO.getCategoria());
         itemRepository.save(itemQueVaiSerGravado);
         itemDTO.setId(itemQueVaiSerGravado.getId());

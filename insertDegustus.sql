@@ -10,7 +10,7 @@ insert into funcionario (cpf, nome, data_nascimento, usuario, senha, idEmpresa, 
 insert into categoria (nome, tipo) values ('Bebidas', 'bebida');
 insert into categoria (nome, tipo) values ('Lanches', 'lanche');
 insert into categoria (nome, tipo) values ('Salgados', 'salgado');
-insert into categoria (nome, tipo) values ('Pratos Gourmet', 'platoGourmet');
+insert into categoria (nome, tipo) values ('Pratos Gourmet', 'pratoGourmet');
 insert into categoria (nome, tipo) values ('Sobremesas', 'sobremesa');
 
 insert into produto (nome, unidadeMedida, idCategoria) values ('Coca-Cola', 1, 11);

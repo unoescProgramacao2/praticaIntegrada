@@ -14,7 +14,7 @@ public class Item extends EntidadeAbstrata {
 
     private String categoria;
 
-    // private List<Imagen> imagens;
+    private String imageUrl;
 
     public String getNome() {
         return nome;
@@ -60,11 +60,12 @@ public class Item extends EntidadeAbstrata {
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-    // public List<Imagen> getImagens() {
-    // return imagens;
-    // }
 
-    // public void setImagens(List<Imagen> imagens) {
-    // this.imagens = imagens;
-    // }
+    public String getUrl() {
+        return imageUrl;
+    }
+
+    public void setUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
