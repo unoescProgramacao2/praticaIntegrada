@@ -1,15 +1,21 @@
 package app.config;
 
 import app.services.UserDetailsServiceImpl;
+
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
@@ -20,23 +26,40 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/h2/**").permitAll()
-                .antMatchers("/js/**").permitAll()
-                .antMatchers("/css/**").permitAll()
-                .antMatchers("/assets/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
+        http.cors();
+
+        /*
+         * .authorizeRequests()
+         * .antMatchers("/h2/**").permitAll()
+         * .antMatchers("/js/**").permitAll()
+         * .antMatchers("/css/**").permitAll()
+         * .antMatchers("/assets/**").permitAll()
+         */
+        /*
+         * .anyRequest().authenticated()
+         * .and()
+         * .formLogin()
+         * .loginPage("/login")
+         * .permitAll()
+         * .and()
+         * .logout()
+         * .permitAll();
+         */
         http.csrf().disable();
         http.headers().frameOptions().disable();
         return http.build();
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+        CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
+        corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
+        corsConfiguration.addAllowedMethod(HttpMethod.PATCH);
+        source.registerCorsConfiguration("/**", corsConfiguration);
+
+        return source;
     }
 
     @Autowired

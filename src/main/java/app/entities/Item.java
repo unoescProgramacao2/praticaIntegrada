@@ -14,7 +14,7 @@ public class Item extends EntidadeAbstrata {
 
     private String categoria;
 
-    // private List<Imagen> imagens;
+    private String imageUrl;
 
     public String getNome() {
         return nome;
@@ -48,11 +48,24 @@ public class Item extends EntidadeAbstrata {
         this.categoria = categoria;
     }
 
-    // public List<Imagen> getImagens() {
-    // return imagens;
-    // }
+    @ManyToOne
+    @JoinColumn(nullable = true, name = "empresa_id")
+    private Empresa empresa;
 
-    // public void setImagens(List<Imagen> imagens) {
-    // this.imagens = imagens;
-    // }
+    public Empresa getEmpresa() {
+
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public String getUrl() {
+        return imageUrl;
+    }
+
+    public void setUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }

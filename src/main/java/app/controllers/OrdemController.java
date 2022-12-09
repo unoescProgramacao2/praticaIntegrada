@@ -9,6 +9,7 @@ import java.util.List;
 import app.dtos.OrdemDTO;
 import app.services.OrdemService;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class OrdemController {

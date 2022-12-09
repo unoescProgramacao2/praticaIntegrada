@@ -14,6 +14,10 @@ public class ItemDTO {
 
     private String categoria;
 
+    private String imageUrl;
+
+    private Long empresaId;
+
     public ItemDTO() {
         super();
     }
@@ -25,8 +29,9 @@ public class ItemDTO {
         this.nome = item.getNome();
         this.descricao = item.getDescricao();
         this.valor = item.getValor();
+        this.imageUrl = item.getUrl();
         this.categoria = item.getCategoria();
-
+        this.empresaId = item.getEmpresa().getId();
     }
 
     public Long getId() {
@@ -68,4 +73,21 @@ public class ItemDTO {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+
+    public Long getEmpresaId() {
+        return empresaId;
+    }
+
+    public void setEmpresaId(Long empresaId) {
+        this.empresaId = empresaId;
+    }
+
+    public String getUrl() {
+        return imageUrl;
+    }
+
+    public void setUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
 }
