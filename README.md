@@ -18,6 +18,9 @@ Trabalho realizado pelos alunos:
 - CANVA
 - Versionamento com GIT.
 
+## Frontend
+- https://github.com/Luis-H-Baroni/degustus-frontend
+
 ## App para Consumidores
 - https://github.com/IsabelaDaCampo/degustus
 
